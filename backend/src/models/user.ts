@@ -22,7 +22,7 @@ userSchema.pre("save", async function (next) {
     if(this.isModified('password')) {
         this.password = await bcrypt.hash(this.password, 8)
     }
-    next();
+    next(); //function by mongo - tell it to just do the next thing, whatever it is
 })
 
 const User = mongoose.model<UserType>("User", userSchema);
