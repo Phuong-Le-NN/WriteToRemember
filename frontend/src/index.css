@@ -1,0 +1,4 @@
+@tailwind base; 
+@tailwind components;
+@tailwind utilities;
+/* what we did was importing all the things that we need tailwind to work into our index*/
