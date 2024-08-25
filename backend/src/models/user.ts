@@ -8,13 +8,15 @@ export type UserType = {
     password: string;
     firstName: string;
     lastName: string;
+    notes: mongoose.Types.ObjectId[];
 };
 
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true},
     firstName: { type: String, required: true},
-    lastName: { type: String, required: true}
+    lastName: { type: String, required: true},
+    notes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Note'}]
 });
 
 //middleware for mongodb telling monngo that before update the document, check if the password has changed, if yes, then we call bcrypt to hash it

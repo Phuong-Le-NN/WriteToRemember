@@ -1,16 +1,10 @@
 const Footer = () => {
     return (
-    <div className="bg-yellow-700 py-10">
-        <div className="container mx-auto flex justify-between items-center">
-            <span className="text-3xl text-white font-extralight tracking-tight">
-                Space for Silence
-            </span>
-            <span className="font-extralight tracking-tight text-white flex gap-4">
-                <p className="cursor-pointer">Privacy Policy</p>
-                <p className="cursor-pointer">Terms of Service</p>
-            </span>
-        </div>
-    </div>
-)}
+        <ul className="social absolute bottom-5 flex justify-center items-center z-10">
+            <li className="list-none"><a href="#" className="block mr-5 transform scale-50 transition-transform duration-500 hover:translate-y-[-15px]"><img src="https://i.ibb.co/x7P24fL/facebook.png" alt="Facebook" className="invert" /></a></li>
+            <li className="list-none"><a href="#" className="block mr-5 transform scale-50 transition-transform duration-500 hover:translate-y-[-15px]"><img src="https://i.ibb.co/Wnxq2Nq/twitter.png" alt="Twitter" className="invert" /></a></li>
+            <li className="list-none"><a href="#" className="block transform scale-50 transition-transform duration-500 hover:translate-y-[-15px]"><img src="https://i.ibb.co/ySwtH4B/instagram.png" alt="Instagram" className="invert" /></a></li>
+        </ul>
+    )}
 
 export default Footer;

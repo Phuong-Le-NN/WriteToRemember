@@ -5,9 +5,10 @@ import { check, validationResult } from "express-validator"
 
 const router = express.Router();
 
-router.get("/test"), async (req: Request, res: Response) => {
-    console.log("users/test path passed")
-}
+router.get("/test", async (req: Request, res: Response) => {
+    console.log("user/test path passed");
+    res.send("User test route");
+});
 
 router.post("/register", [
     check("lastName", "Last Name is reqires").isString(),
@@ -44,7 +45,7 @@ router.post("/register", [
             secure: process.env.NODE_ENV === "production",
             maxAge: 86400000
         })
-        return res.sendStatus(200);
+        return res.status(200).send({ message: "User register OK"});
     } catch (error) {
         console.log(error); //log the error out for developer to see, but not return the rror to the frontend (as it is irrelevant and might be valuable to hacker (?))
         res.status(500).send({message: "Something went wrong"})
