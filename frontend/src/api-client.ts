@@ -1,6 +1,7 @@
 import { RegisterFormData } from "./pages/Register"
 import {SignInFormData} from "./pages/SignIn";
-import {CreateNoteFormData} from "./pages/CreateNote"
+import {CreateNoteFormData} from "./pages/CreateNote";
+import { NoteType } from "../../backend/src/models/note";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -77,8 +78,9 @@ export const createNote = async (formData: CreateNoteFormData)=>{
     return responseBody;
 }
 
-export const allNotes = async () => {
-    const response = await fetch(`${API_BASE_URL}/api/users/register`, {
+export const allNotes = async () : Promise<NoteType[]> => {
+    console.log("allNotes apiclient entered")
+    const response = await fetch(`${API_BASE_URL}/api/notes/allNotes`, {
         method: 'GET',
         credentials: "include", //anytime we make  post request we want http cookies along wiht the request and we also want to set any cookies we get back from the browser
         headers: {
@@ -87,8 +89,10 @@ export const allNotes = async () => {
     });
 
     const responseBody = await response.json();
+
     if (!response.ok) {
-        throw new Error(responseBody.message);
+        throw new Error(responseBody.json);
     }
-    return responseBody;
+    console.log(responseBody)
+    return responseBody.content;
 }

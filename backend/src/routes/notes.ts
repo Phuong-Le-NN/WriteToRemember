@@ -14,13 +14,17 @@ router.get("/test", async (req: Request, res: Response) => {
 
 // To retrieve all notes from the database
 router.get("/allNotes", verifyToken, (req: Request, res: Response) => {
+    console.log(req.userId)
     Note.aggregate(
-      [ { $match : { userId : req.userId } },
-        { $sort: {createdAt: -1}}
+      [ 
+        { $match : {  } },
+        // { $match : { userId : req.userId } },
+        // { $sort: {createdAt: -1}}
        ]
       )
       .then((result) => {
         if (result.length > 0) {
+          console.log(result)
           res.json({
             msg: "All notes have been fetched successfully!",
             content: result,
