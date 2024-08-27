@@ -15,11 +15,13 @@ router.get("/test", async (req: Request, res: Response) => {
 // To retrieve all notes from the database
 router.get("/allNotes", verifyToken, (req: Request, res: Response) => {
     console.log(req.userId)
+    //The require('mongodb') statement imports the MongoDB Node.js driver.
+    //The .ObjectId property of the imported MongoDB driver is a class used to create or work with MongoDB ObjectId instances.
+    const ObjectId = require('mongodb').ObjectId;
     Note.aggregate(
       [ 
-        { $match : {  } },
-        // { $match : { userId : req.userId } },
-        // { $sort: {createdAt: -1}}
+        { $match : { userId : new ObjectId(req.userId)  } },
+        { $sort: {createdAt: -1}}
        ]
       )
       .then((result) => {
