@@ -1,5 +1,6 @@
 import { RegisterFormData } from "./pages/Register"
 import {SignInFormData} from "./pages/SignIn";
+import {CreateNoteFormData} from "./pages/CreateNote"
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -14,10 +15,10 @@ export const register = async (formData: RegisterFormData) => {
     });
 
     const responseBody = await response.json();
-
     if (!response.ok) {
         throw new Error(responseBody.message);
     }
+    return responseBody;
 }
 
 export const signIn = async (formData: SignInFormData) => {
@@ -45,7 +46,6 @@ export const validateToken = async () => {
     if (!response.ok) {
     throw new Error("Token invalid");
     }
-
     return response.json();
 };
 
@@ -53,9 +53,42 @@ export const signOut = async ()=>{
     const response = await fetch (`${API_BASE_URL}/api/auth/logout`, {
         credentials: "include",
         method:"POST"
-    })
+    });
 
     if(!response.ok){
         throw new Error("Error during sign out")
     }
+}
+
+export const createNote = async (formData: CreateNoteFormData)=>{
+    const response = await fetch (`${API_BASE_URL}/api/notes/addNote`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+    });
+
+    const responseBody = await response.json()
+    if(!response.ok){
+        throw new Error(responseBody.message)
+    }
+    return responseBody;
+}
+
+export const allNotes = async () => {
+    const response = await fetch(`${API_BASE_URL}/api/users/register`, {
+        method: 'GET',
+        credentials: "include", //anytime we make  post request we want http cookies along wiht the request and we also want to set any cookies we get back from the browser
+        headers: {
+            "Content-Type":"application/json"
+        },
+    });
+
+    const responseBody = await response.json();
+    if (!response.ok) {
+        throw new Error(responseBody.message);
+    }
+    return responseBody;
 }

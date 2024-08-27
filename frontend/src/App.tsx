@@ -8,6 +8,8 @@ import Layout from "./layouts/Layout"
 import Register from "./pages/Register"
 import SignIn from "./pages/SignIn";
 import Showcase from "./pages/Homepage";
+import CreateNote from "./pages/CreateNote";
+import AllNotes from "./pages/AllNotes"
 
 
 const App = () => {
@@ -42,6 +44,22 @@ const App = () => {
           path="/showcase" 
           element={
               <Showcase />
+          } 
+        />
+        <Route 
+          path="/createNote" 
+          element={
+            <Layout>
+              <CreateNote />
+            </Layout>
+          } 
+        />
+        <Route 
+          path="/allNotes" 
+          element={
+            <Layout>
+              <AllNotes />
+            </Layout>
           } 
         />
         <Route 

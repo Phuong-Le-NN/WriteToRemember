@@ -34,6 +34,7 @@ router.get("/allNotes", verifyToken, (req: Request, res: Response) => {
 
   // To add a new note to the database
   router.post("/addNote",  verifyToken, async (req: Request, res: Response) => {
+    console.log("addnote path called", req.body)
     const user = await User.findById(req.userId);
     if (!user) {
       return res.status(400).json({ message: "User does not exists!" });
@@ -48,7 +49,7 @@ router.get("/allNotes", verifyToken, (req: Request, res: Response) => {
           content: result,
         });
       })
-      .catch((error) => res.json({ msg: error.message }));
+      .catch((error) => res.status(400).json({ msg: error.message }));
   });
   
   // To retrive a single note by its ID
