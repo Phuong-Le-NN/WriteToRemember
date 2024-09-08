@@ -14,13 +14,19 @@ router.get("/test", async (req: Request, res: Response) => {
 
 // To retrieve all notes from the database
 router.get("/allNotes", verifyToken, (req: Request, res: Response) => {
+    console.log(req.userId)
+    //The require('mongodb') statement imports the MongoDB Node.js driver.
+    //The .ObjectId property of the imported MongoDB driver is a class used to create or work with MongoDB ObjectId instances.
+    const ObjectId = require('mongodb').ObjectId;
     Note.aggregate(
-      [ { $match : { userId : req.userId } },
+      [ 
+        { $match : { userId : new ObjectId(req.userId)  } },
         { $sort: {createdAt: -1}}
        ]
       )
       .then((result) => {
         if (result.length > 0) {
+          console.log(result)
           res.json({
             msg: "All notes have been fetched successfully!",
             content: result,
@@ -34,6 +40,7 @@ router.get("/allNotes", verifyToken, (req: Request, res: Response) => {
 
   // To add a new note to the database
   router.post("/addNote",  verifyToken, async (req: Request, res: Response) => {
+    console.log("addnote path called", req.body)
     const user = await User.findById(req.userId);
     if (!user) {
       return res.status(400).json({ message: "User does not exists!" });
@@ -48,7 +55,7 @@ router.get("/allNotes", verifyToken, (req: Request, res: Response) => {
           content: result,
         });
       })
-      .catch((error) => res.json({ msg: error.message }));
+      .catch((error) => res.status(400).json({ msg: error.message }));
   });
   
   // To retrive a single note by its ID

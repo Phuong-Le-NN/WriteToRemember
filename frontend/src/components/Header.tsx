@@ -21,7 +21,7 @@ const Header = () => {
       <div className="flex flex-row items-end z-0"> 
         <div className={`${menuActive? 'w-auto':'w-full'} flex justify-between bg-transparent`}>
           <div className="absolute top-0 left-0 w-full p-10 flex flex-row justify-between py-10 px-10">
-            <h2 className="flex text-white text-2xl uppercase ">Write to remember</h2>
+            <h2 className="flex text-white text-2xl uppercase ">Just a place for you to write :D</h2>
             <button 
               className={`${menuActive? 'hidden':'flex'} font-bold text-white text-xl hover:underline`}
               id="hidden"
