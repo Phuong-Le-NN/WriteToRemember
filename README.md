@@ -1,2 +1,2 @@
 # practiceProject
-Web dev project for practice
+A MERN Note creating Web dev project for practice
