@@ -6,6 +6,7 @@ import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth"
 import noteRoutes from "./routes/notes"
 import cookieParser from "cookie-parser"
+import path from 'path';
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
 console.log("MONGODB connected")
@@ -21,6 +22,8 @@ app.use(cors({
 app.get("/api/test", (req: Request, res: Response) => {
     res.json({ message: "hello from express endpoint!"});
 });
+
+app.use(express.static(path.join(__dirname, "../../frontend/dist"))) //start frontend just by starting backend
 
 app.use("/api/auth", authRoutes)
 app.use("/api/users", userRoutes)
