@@ -3,7 +3,7 @@ import {SignInFormData} from "./pages/SignIn";
 import {CreateNoteFormData} from "./pages/CreateNote";
 import { NoteType } from "../../backend/src/models/note";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ""; //when we bundle the frontend into the backend there might be no base url anymore
 
 export const register = async (formData: RegisterFormData) => {
     const response = await fetch(`${API_BASE_URL}/api/users/register`, {
