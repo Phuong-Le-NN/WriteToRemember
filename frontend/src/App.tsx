@@ -10,6 +10,7 @@ import SignIn from "./pages/SignIn";
 import Showcase from "./pages/Homepage";
 import CreateNote from "./pages/CreateNote";
 import AllNotes from "./pages/AllNotes"
+import Chatbot from "./pages/GenerateImage";
 
 
 const App = () => {
@@ -59,6 +60,14 @@ const App = () => {
           element={
             <Layout>
               <AllNotes />
+            </Layout>
+          } 
+        />
+        <Route 
+          path="/chatbot" 
+          element={
+            <Layout>
+              <Chatbot />
             </Layout>
           } 
         />
