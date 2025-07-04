@@ -6,12 +6,12 @@ import { check, validationResult } from "express-validator"
 const router = express.Router();
 
 router.get("/test", async (req: Request, res: Response) => {
-    console.log("user/test path passed");
+    console.log("users/test path passed");
     res.send("User test route");
 });
 
 router.post("/register", [
-    check("lastName", "Last Name is reqires").isString(),
+    check("lastName", "Last Name is requires").isString(),
     check("firstName", "First Name is required").isString(), //check that the firstname property exist if not return message, it also check if first name is a string
     check("email", "Email is required").isEmail(),
     check("password", "Password with 6 or more characters required").isLength({

@@ -1,5 +1,5 @@
 // src/components/NoteList.js
-import React, { useEffect, useState} from 'react';
+import { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {NoteType} from "../../../backend/src/models/note"
 import * as apiClient from "../api-client";

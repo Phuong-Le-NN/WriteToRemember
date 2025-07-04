@@ -16,8 +16,22 @@ app.use(express.json()); // helps config the body of api reuqest into the form o
 app.use(express.urlencoded({ extended: true })); //help us parse the url get and create parameter...
 app.use(cors({
     origin: process.env.FRONTEND_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
 })); //only replies to certain request - we only accept request from this URL and that URL must include the credential in the request
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", process.env.FRONTEND_URL || "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(204);
+    }
+
+    next();
+});
 
 app.get("/api/test", (req: Request, res: Response) => {
     res.json({ message: "hello from express endpoint!"});

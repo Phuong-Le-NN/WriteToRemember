@@ -4,11 +4,12 @@ import {CreateNoteFormData} from "./pages/CreateNote";
 import { NoteType } from "../../backend/src/models/note";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ""; //when we bundle the frontend into the backend there might be no base url anymore
+console.log("API_BASE_URL:", API_BASE_URL);
 
 export const register = async (formData: RegisterFormData) => {
     const response = await fetch(`${API_BASE_URL}/api/users/register`, {
         method: 'POST',
-        credentials: "include", //anytime we make  post request we want http cookies along wiht the request and we also want to set any cookies we get back from the browser
+        credentials: "include", //anytime we make  post request we want http cookies along with the request and we also want to set any cookies we get back from the browser
         headers: {
             "Content-Type":"application/json"
         },
