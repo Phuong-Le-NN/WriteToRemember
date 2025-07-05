@@ -14,7 +14,7 @@ type AppContext = {
     isLoggedIn: boolean;
 }
 
-const AppContext = React.createContext <AppContext | undefined> (undefined);
+const AppContext = React.createContext<AppContext | undefined>(undefined);
 
 export const AppContextProvider = ({
     children,
@@ -35,7 +35,7 @@ export const AppContextProvider = ({
                 showToast: (toastMessage) =>{
                     setToast(toastMessage)
                 },
-                isLoggedIn: !isError //if there is not erroe isloggedin will be true
+                isLoggedIn: !isError //if there is not error is logged in will be true
             }}
         >
             {toast && (

@@ -1,49 +1,53 @@
-import express, { Application, Request, Response }  from 'express';
+import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
-import "dotenv/config"; //import the environment variable from .env files
+import "dotenv/config";
 import mongoose from 'mongoose';
 import userRoutes from "./routes/users";
-import authRoutes from "./routes/auth"
-import noteRoutes from "./routes/notes"
-import cookieParser from "cookie-parser"
+import authRoutes from "./routes/auth";
+import noteRoutes from "./routes/notes";
+import cookieParser from "cookie-parser";
 import path from 'path';
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
-console.log("MONGODB connected")
-const app: Application = express(); // create a new express app
-app.use(cookieParser())
-app.use(express.json()); // helps config the body of api reuqest into the form of jason fso that we dont have to do it ourselves at every endpoints
-app.use(express.urlencoded({ extended: true })); //help us parse the url get and create parameter...
-app.use(cors({
-    origin: process.env.FRONTEND_URL,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: true,
-})); //only replies to certain request - we only accept request from this URL and that URL must include the credential in the request
+console.log("MONGODB connected");
 
+const app: Application = express();
+
+// Log incoming request origin
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", process.env.FRONTEND_URL || "*");
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    
-    if (req.method === "OPTIONS") {
-        return res.sendStatus(204);
-    }
-
+    console.log("Request Origin:", req.headers.origin);
     next();
 });
 
+// Apply CORS middleware
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+}));
+
+
+// Optional: handle preflight separately ONLY if needed
+// app.options('*', cors());  // This line is only needed if you're NOT using app.use(cors(...)) correctly
+
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+
+// Define API routes
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/notes", noteRoutes);
+
+// Test endpoint
 app.get("/api/test", (req: Request, res: Response) => {
-    res.json({ message: "hello from express endpoint!"});
+    res.json({ message: "hello from express endpoint!" });
 });
 
-app.use(express.static(path.join(__dirname, "../../frontend/dist"))) //start frontend just by starting backend
-
-app.use("/api/auth", authRoutes)
-app.use("/api/users", userRoutes)
-app.use("/api/notes", noteRoutes)
-
-app.listen(7000, ()=>{
-    console.log("server is running on localhost: 7000")
+// Start the server
+app.listen(7000, () => {
+    console.log("Server is running on localhost:7000");
 });
-

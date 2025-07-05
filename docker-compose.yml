@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: write-to-remember-backend
+    container_name: write-remember-backend
+    command: npm run dev             # or nodemon server.js if preferred
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules    # avoid overwriting node_modules
+    ports:
+      - "7000:7000"
+    env_file: ./backend/.env
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+
+  client:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: write-to-remember-frontend
+    container_name: write-remember-frontend
+    command: npm run dev             # or whatever your frontend dev script is
+    volumes:
+      - ./frontend:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - server
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
