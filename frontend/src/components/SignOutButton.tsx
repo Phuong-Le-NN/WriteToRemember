@@ -2,7 +2,11 @@ import {useMutation, useQueryClient} from "react-query";
 import * as apiClient from "../api-client"
 import {useAppContext} from "../contexts/AppContext";
 
-const signOutButton = () => {
+interface SignOutButtonProps {
+    className?: string;
+}
+
+const signOutButton: React.FC<SignOutButtonProps> = ({ className }) => {
     const queryClient = useQueryClient() //the hook that let us do actions at global level
     const { showToast } = useAppContext();
 
@@ -20,7 +24,7 @@ const signOutButton = () => {
         mutation.mutate();
     }
     return (
-        <button className="text-stone-500 text-xl hover:underline" onClick={handleClick}>
+        <button onClick={handleClick} className={className}>
             Sign Out
         </button>
     )

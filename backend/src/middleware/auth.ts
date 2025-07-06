@@ -14,7 +14,7 @@ declare global {
 export const verifyToken = (req: Request, res: Response, next: NextFunction) =>{
     const token = req.cookies["auth_token"];
     if (!token){
-        return res.status(401).json({ message: "unauthorized 1" });
+        return res.status(401).json({ message: "Please log in to continue" });
     }
 
     try {
@@ -23,6 +23,6 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) =>{
         req.userId = (decoded as JwtPayload).userId; //whenver request passed the middle ware and forwarded to the function, the userId is included and passed on as well
         next(); //tell express to continue and do the next thing it was going to do (foward request to ...)
     } catch(error) {
-        return res.status(401).json({ message: "unauthorized 2"})
+        return res.status(401).json({ message: "Please log out and sign in again to continue"})
     }
 }

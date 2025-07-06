@@ -117,7 +117,7 @@ export const oneNote = async (id: string) : Promise<NoteType> => {
 }
 
 export const updateNote = async (id: string, formData: UpdateNoteFormData) =>{
-    const response = await fetch (`${API_BASE_URL}/api/notes/noteDetails/${id}`, {
+    const response = await fetch (`${API_BASE_URL}/api/notes/updateNote/${id}`, {
         method: "PATCH",
         credentials: "include",
         headers: {

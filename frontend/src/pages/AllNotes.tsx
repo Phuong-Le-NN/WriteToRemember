@@ -24,7 +24,7 @@ const AllNotes = () => {
 
 
     const handleNoteClick = (note: NoteType) => {
-        navigate(`/${note._id}`) //display one note//fix path
+        navigate(`/updateNote/${note._id}`)
     };
 
     const createNewNote = () => {
@@ -38,7 +38,10 @@ const AllNotes = () => {
                 {notesArr?.length > 0 ? (
                     notesArr.map(note => (
                         <li key={note._id}>
-                            <button onClick={() => handleNoteClick(note)}>
+                            <button
+                                className="hover:underline h-[3px]"
+                                onClick={() => handleNoteClick(note)}
+                            >
                                 {note.title}
                             </button>
                         </li>
@@ -47,7 +50,7 @@ const AllNotes = () => {
                     <li>
                         <button
                             onClick={createNewNote}
-                            className="bg-transparent text-white px-4 py-2 rounded transition hover:bg-slate-200 hover:text-stone-500"
+                            className="bg-transparent text-white px-4 py-2 rounded transition  hover:bg-stone-500 hover:bg-opacity-35 hover:backdrop-blur-sm hover:border-l hover:border-stone-500"
                         >
                             Create a new note
                         </button>

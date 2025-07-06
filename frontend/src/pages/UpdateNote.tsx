@@ -64,14 +64,22 @@ const mutation = useMutation(
 
     return (
         <form className="flex flex-col gap-5 mx-5 sm:mx-auto md:mx-20" onSubmit={onSubmit}>
-            <h2 className="text-white text-3xl font-bold">Create a New Note</h2>
+            <h2 className="text-white text-3xl font-bold">Update a Note</h2>
             <label className="text-white text-sm font-bold flex-1">
             Title
             <input
-                className="text-stone-500 border rounded w-full py-1 px-2 font-normal"
+                className="text-white bg-stone-500 border border-[silver] bg-opacity-35 backdrop-blur-sm rounded font-normal focus:outline-none focus:ring-0 w-full py-1 px-2"
                 type="text"
                 defaultValue={note?.title || ""} // Pre-fill the title if note is fetched
-                {...register("title", { required: "This field is required" })}
+                {...register("title", {
+                    validate: (value) => {
+                        // Custom condition: title must not be only whitespace and must be at least 3 characters
+                        if (!value || value.trim().length < 1) {
+                            return "Title must be at least 1 non-whitespace character.";
+                        }
+                        return true;
+                    },
+                })}
             />
             {errors.title && (
                 <span className="text-red-500">{errors.title.message}</span>
@@ -81,9 +89,9 @@ const mutation = useMutation(
             <label className="text-white text-sm font-bold flex-1">
             Details
             <textarea
-                className="text-stone-500 border rounded w-full h-72 py-1 px-2 font-normal"
+                className="text-white bg-stone-500 border border-[silver] bg-opacity-35 backdrop-blur-sm rounded font-normal focus:outline-none focus:ring-0 w-full h-72 py-1 px-2"
                 defaultValue={note?.details || ""} // Pre-fill the details if note is fetched
-                {...register("details", { required: "This field is required" })}
+                {...register("details")}
             />
             {errors.details && (
                 <span className="text-red-500">{errors.details.message}</span>
@@ -94,7 +102,7 @@ const mutation = useMutation(
             type="submit" 
             className="text-white p-2 font-bold hover:bg-slate-200 hover:bg-opacity-50 text-xl"
             >
-            Create Note
+            Update Note
             </button>
         </form>
     );

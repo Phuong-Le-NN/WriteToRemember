@@ -21,7 +21,7 @@ const App = () => {
           path="/" 
           element={
             <Layout>
-              <p>Main Screen</p>
+              <p></p>
             </Layout>
           } 
         />
