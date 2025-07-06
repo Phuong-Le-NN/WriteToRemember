@@ -1,2 +1,2 @@
-# practiceProject
-A MERN Note creating Web dev project for practice
+# Write To Remember
+A prominent, distraction-free note taking app for immediate thought capture.
