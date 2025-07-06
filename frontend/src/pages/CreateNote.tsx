@@ -7,6 +7,7 @@ import { useAppContext } from "../contexts/AppContext";
 export type CreateNoteFormData = {
     title: string;
     details: string;
+    id: string;
 };
 
 const CreateNote = () => {

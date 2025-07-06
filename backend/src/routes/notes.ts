@@ -22,7 +22,7 @@ router.get("/allNotes", verifyToken, (req: Request, res: Response) => {
       [ 
         { $match : { userId : new ObjectId(req.userId)  } },
         { $sort: {createdAt: -1}}
-       ]
+      ]
       )
       .then((result) => {
         if (result.length > 0) {

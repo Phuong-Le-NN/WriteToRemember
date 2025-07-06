@@ -13,12 +13,6 @@ console.log("MONGODB connected");
 
 const app: Application = express();
 
-// Log incoming request origin
-app.use((req, res, next) => {
-    console.log("Request Origin:", req.headers.origin);
-    next();
-});
-
 // Apply CORS middleware
 app.use(cors({
     origin: process.env.FRONTEND_URL,

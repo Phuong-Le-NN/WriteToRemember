@@ -13,7 +13,6 @@ const AllNotes = () => {
         const fetchNotes = async () => {
             try {
                 const response = await apiClient.allNotes();
-                console.log(response)
                 setNotesArr(response); // Update the state with the fetched notes
             } catch (err) {
                 console.error('Error fetching notes:', err);
@@ -25,7 +24,11 @@ const AllNotes = () => {
 
 
     const handleNoteClick = (note: NoteType) => {
-        navigate(`http://localhost:5173/api/editNotes/${note._id}`)
+        navigate(`/${note._id}`) //display one note//fix path
+    };
+
+    const createNewNote = () => {
+        navigate('/createNote');
     };
 
     console.log("notesArr", notesArr)
@@ -41,7 +44,14 @@ const AllNotes = () => {
                         </li>
                     ))
                 ) : (
-                    <li>No notes available</li>
+                    <li>
+                        <button
+                            onClick={createNewNote}
+                            className="bg-transparent text-white px-4 py-2 rounded transition hover:bg-slate-200 hover:text-stone-500"
+                        >
+                            Create a new note
+                        </button>
+                    </li>
                 )}
             </ul>
         </div>

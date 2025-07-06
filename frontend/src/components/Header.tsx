@@ -51,7 +51,7 @@ const Header = () => {
                 }
               </li>
               <li className="list-none">
-                <Link to="/sign-in" className=" text-stone-500 text-xl hover:underline">
+                <Link to="/allNotes" className=" text-stone-500 text-xl hover:underline">
                   Library
                 </Link>
               </li>

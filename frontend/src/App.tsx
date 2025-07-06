@@ -10,6 +10,7 @@ import SignIn from "./pages/SignIn";
 import Showcase from "./pages/Homepage";
 import CreateNote from "./pages/CreateNote";
 import AllNotes from "./pages/AllNotes"
+import UpdateNote from "./pages/UpdateNote";
 
 
 const App = () => {
@@ -51,6 +52,14 @@ const App = () => {
           element={
             <Layout>
               <CreateNote />
+            </Layout>
+          } 
+        />
+        <Route 
+          path="/updateNote/:id" 
+          element={
+            <Layout>
+              <UpdateNote />
             </Layout>
           } 
         />
