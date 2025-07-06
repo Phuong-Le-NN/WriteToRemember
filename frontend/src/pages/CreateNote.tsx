@@ -37,7 +37,7 @@ const CreateNote = () => {
     });
 
     return (
-        <form className="flex flex-col gap-5 mx-5 sm:mx-auto md:mx-20" onSubmit={onSubmit}>
+        <form className="flex flex-col gap-5 mx-5 sm:mx-auto md:mx-20 mt-16" onSubmit={onSubmit}>
             <h2 className="text-white text-3xl font-bold">Create a New Note</h2>
             <label className="text-white text-sm font-bold flex-1">
                 Title
