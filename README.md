@@ -1,2 +1,2 @@
 # Write To Remember
-A prominent, distraction-free note taking app for immediate thought capture.
+A prominent, minimalist note taking app for immediate thought capture.
