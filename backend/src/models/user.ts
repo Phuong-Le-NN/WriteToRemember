@@ -11,7 +11,7 @@ export type UserType = {
     notes: mongoose.Types.ObjectId[];
 };
 
-const userSchema = new mongoose.Schema({
+export const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true},
     firstName: { type: String, required: true},

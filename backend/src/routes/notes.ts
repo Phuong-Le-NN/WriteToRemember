@@ -3,7 +3,6 @@ import Note from "../models/note"
 import {verifyToken} from "../middleware/auth";
 import User from "../models/user";
 
-
 const router = express.Router();
 
 router.get("/test", async (req: Request, res: Response) => {

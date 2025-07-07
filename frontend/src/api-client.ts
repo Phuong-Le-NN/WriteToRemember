@@ -3,6 +3,7 @@ import {SignInFormData} from "./pages/SignIn";
 import {CreateNoteFormData} from "./pages/CreateNote";
 import { UpdateNoteFormData } from "./pages/UpdateNote";
 import { NoteType } from "../../backend/src/models/note";
+import { IMessage } from "../../backend/src/models/message";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ""; //when we bundle the frontend into the backend there might be no base url anymore
 console.log("API_BASE_URL:", API_BASE_URL);
@@ -132,3 +133,52 @@ export const updateNote = async (id: string, formData: UpdateNoteFormData) =>{
     }
     return responseBody;
 }
+
+export const getInitialChatMessages = async () => {
+    const response = await fetch(`${API_BASE_URL}/api/chats/chatHistory`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    const responseBody = await response.json();
+    if (!response.ok) {
+        throw new Error(responseBody.message);
+    }
+    return responseBody.messages || [];
+}
+
+export const sendMessage = async (message: IMessage) => {
+    const response = await fetch(`${API_BASE_URL}/api/chats/newMessages`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(message),
+    });
+
+    const responseBody = await response.json();
+    if (!response.ok) {
+        throw new Error(responseBody.message);
+    }
+    return responseBody;
+}
+
+// export const createChat = async () => {
+//     const response = await fetch(`${API_BASE_URL}/api/chats`, {
+//         method: "POST",
+//         credentials: "include",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//     });
+
+//     const responseBody = await response.json();
+//     if (!response.ok) {
+//         throw new Error(responseBody.message);
+//     }
+//     return responseBody.messages || [];
+// }

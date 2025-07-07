@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
 import noteRoutes from "./routes/notes";
+import chatRoutes from './routes/chats';
 import cookieParser from "cookie-parser";
 import path from 'path';
 
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/notes", noteRoutes);
+app.use("/api/chats", chatRoutes);
 
 // Test endpoint
 app.get("/api/test", (req: Request, res: Response) => {

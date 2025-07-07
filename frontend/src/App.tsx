@@ -11,6 +11,7 @@ import Showcase from "./pages/Homepage";
 import CreateNote from "./pages/CreateNote";
 import AllNotes from "./pages/AllNotes"
 import UpdateNote from "./pages/UpdateNote";
+import Chatty from "./pages/Chatty";
 
 
 const App = () => {
@@ -68,6 +69,14 @@ const App = () => {
           element={
             <Layout>
               <AllNotes />
+            </Layout>
+          } 
+        />
+        <Route 
+          path="/chatty" 
+          element={
+            <Layout>
+              <Chatty />
             </Layout>
           } 
         />
