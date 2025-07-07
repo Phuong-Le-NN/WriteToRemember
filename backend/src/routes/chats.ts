@@ -2,7 +2,7 @@ import express, { Request, Response} from "express";
 import {verifyToken} from "../middleware/auth";
 import Chat, {IChat} from "../models/chat";
 import { IMessage } from "../models/message";
-import { Groq } from 'groq-sdk';
+import {Groq} from "groq-sdk";
 
 const router = express.Router();
 
