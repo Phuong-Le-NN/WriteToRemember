@@ -68,6 +68,11 @@ const Header = () => {
                 </Link>
               </li>
               <li className="list-none">
+                <Link to="/chatty" className=" text-white text-xl hover:underline">
+                  Big Sibling
+                </Link>
+              </li>
+              <li className="list-none">
                 <Link to="/allNotes" className=" text-white text-xl hover:underline">
                   Library
                 </Link>

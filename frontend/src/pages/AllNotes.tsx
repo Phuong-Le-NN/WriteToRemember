@@ -39,10 +39,10 @@ const AllNotes = () => {
                     notesArr.map(note => (
                         <li key={note._id}>
                             <button
-                                className="hover:underline h-[3px]"
+                                className="text-white hover:underline h-[3px]"
                                 onClick={() => handleNoteClick(note)}
                             >
-                                {note.title}
+                                Note title: {note.title}
                             </button>
                         </li>
                     ))

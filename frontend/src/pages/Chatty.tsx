@@ -37,7 +37,7 @@ const Chatty: React.FC = () => {
             }
         } catch (err) {
             console.error("Error sending message:", err);
-            setMessages((msgs) => [...msgs, { role: "assistant", content: "Error: Unable to get a response." }]);
+            setMessages((msgs) => [...msgs, { role: "assistant", content: "Error: Unable to get a response. Please sign in or try again later." }]);
         }
 
     };
@@ -49,7 +49,10 @@ const Chatty: React.FC = () => {
     return (
         <div className="flex flex-col items-center w-full h-80">
             <h2 className="text-white text-3xl font-bold mt-6">Your big sibling, Chatty!</h2>
-            <div className="w-full max-w-3xl flex-1 flex flex-col mt-10 border rounded-lg shadow bg-stone-500 border-[silver] bg-opacity-35 backdrop-blur-sm h-[500px]">
+            <div
+                className="w-full max-w-6xl flex-1 flex flex-col mt-10 border rounded-lg shadow bg-stone-500 border-[silver] bg-opacity-35 backdrop-blur-sm"
+                style={{ height: "500px", minHeight: "500px", maxHeight: "500px" }}
+            >
                 <div className="overflow-y-auto p-4 flex flex-col gap-3 flex-1">
                     {messages.slice(1).map((msg, idx) => (
                         <div
